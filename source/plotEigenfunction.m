@@ -1,6 +1,17 @@
-function f = plotEigenfunction( PTilde,a,b,j )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+function f = plotEigenfunction(PTilde,a,b,j)
+% PLOTEIGENFUNCTION - plots the corresponding j-th eigenfunction of
+% PTilde
+%
+% Inputs:
+%    PTilde - matrix of discretized operator
+%    a - left boundary of frequencies of the fourier basis
+%    b - right boundary of frequencies of the fourier basis
+%    j - index specifying which eigenfunction is plotted
+%
+% Example:
+%    PTilde = getTransferOperator(-5,5,2);
+%    plotEigenfunction(PTilde,-5,5,4);
+    
     n = b-a+1;
     
     [V,~] = eig(PTilde);

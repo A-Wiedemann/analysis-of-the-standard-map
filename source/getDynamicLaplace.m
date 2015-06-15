@@ -1,6 +1,15 @@
-function DHat = getDTilde(a,b,K)
-% GETDHAT - returns the matrix of the discretized dynamic laplace operator
-%   
+function DLTilde = getDynamicLaplace(a,b,K)
+% GETDYNAMICLAPLACE - returns the matrix of the discretized dynamic
+% laplace operator
+%
+% Inputs:
+%    a - left boundary of frequencies of the fourier basis
+%    b - right boundary of frequencies of the fourier basis
+%    K - intensity of the kicks
+%
+% Example:
+%    DLTilde = getDynamicLaplace(-5,5,2);
+    
     n = b-a+1;
     
     getIndex1 = @(i) double(idivide(i-1,int32(n)) + a);
@@ -24,7 +33,7 @@ function DHat = getDTilde(a,b,K)
     end
     
     
-    PTilde = getPTilde(a,b,K);
+    P = getTransferOperator(a,b,K);
     
-    DHat = (DTilde + PTilde'*DTilde*PTilde);
+    DLTilde = (DTilde + (P^2)'*DTilde*P^2)/2;
 end

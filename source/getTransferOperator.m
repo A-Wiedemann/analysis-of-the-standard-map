@@ -1,6 +1,15 @@
-function PTilde = getPTilde( a,b,K )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+function PTilde = getTransferOperator(a,b,K)
+% GETTRANSFEROPERATOR - returns the matrix of the discretized
+% transfer operator
+%    
+% Inputs:
+%    a - left boundary of frequencies of the fourier basis
+%    b - right boundary of frequencies of the fourier basis
+%    K - intensity of the kicks
+%
+% Example:
+%    PTilde = getTransferOperator(-5,5,2);
+    
     n = b-a+1;
     
     getIndex1 = @(i) double(idivide(i-1,int32(n)) + a);
@@ -25,5 +34,3 @@ function PTilde = getPTilde( a,b,K )
         end
     end
 end
-
-

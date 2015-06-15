@@ -2,7 +2,7 @@ clear; clc;
 cd('../source/');
 
 %% Eigenvalues
-DL = getDHat(-7,7,2);
+DL = getDynamicLaplace(-7,7,2);
 
 EV = eig(DL);
 [~,I] = sort(EV,'descend');
