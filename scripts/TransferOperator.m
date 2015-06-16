@@ -18,12 +18,9 @@ hold off;
 
 
 %% Eigenfunctions
-% sorted indices of eigenvalues
-[~,I] = sort(abs(EV-1));
-
-% Plotting of corresponding eigenfunctions
-plotEigenfunction(P,-7,7,I(2));
-plotEigenfunction(P,-7,7,I(3));
-plotEigenfunction(P,-7,7,I(4));
+% plot corresponding eigenfunctions of nearest eigenvalues to 1 
+plotEigenfunction(P,-7,7,2);
+plotEigenfunction(P,-7,7,3);
+plotEigenfunction(P,-7,7,4);
 
 cd('../scripts');

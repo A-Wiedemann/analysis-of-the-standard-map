@@ -9,8 +9,9 @@ EV = eig(DL);
 plot(EV(I),'+','color','green');
 
 %% Eigenfunctions
-plotEigenfunction(DL,-7,7,I(2));
-plotEigenfunction(DL,-7,7,I(3));
-plotEigenfunction(DL,-7,7,I(4));
+% plot corresponding eigenfunctions of nearest eigenvalues to 1
+plotEigenfunction(DL,-7,7,2);
+plotEigenfunction(DL,-7,7,3);
+plotEigenfunction(DL,-7,7,4);
 
 cd('../scripts');

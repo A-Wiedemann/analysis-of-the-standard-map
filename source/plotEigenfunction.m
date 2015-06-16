@@ -1,33 +1,32 @@
-function f = plotEigenfunction(PTilde,a,b,j)
-% PLOTEIGENFUNCTION - plots the corresponding j-th eigenfunction of
-% PTilde
-%
+function f = plotEigenfunction(DO,a,b,j)
+% PLOTEIGENFUNCTION - plots the corresponding eigenfunction of the j-th nearest eigenvalue to 1
+% 
 % Inputs:
-%    PTilde - matrix of discretized operator
+%    DO - matrix of discretized operator
 %    a - left boundary of frequencies of the fourier basis
 %    b - right boundary of frequencies of the fourier basis
 %    j - index specifying which eigenfunction is plotted
 %
 % Example:
 %    PTilde = getTransferOperator(-5,5,2);
-%    plotEigenfunction(PTilde,-5,5,4);
+%    plotEigenfunction(PTilde,-5,5,2);
     
     n = b-a+1;
     
-    [V,~] = eig(PTilde);
-    EW  = eig(PTilde);
+    [V,~] = eig(DO);
+    EV  = eig(DO);
 
-    getIndex1 = @(i) double(idivide(i-1,int32(n)) + a);
-    getIndex2 = @(i) mod(i-1,n) + a;
+    [~,I] = sort(abs(EV-1));
+    
+    v = V(:,I(j));
+    
+    v = reshape(v,n,n);
     
     f = @(p,theta) 0;
-    
-    for i = 1:n^2
-        k_1 = getIndex1(i);
-        k_2 = getIndex2(i);
-  
-        f = @(p,theta) f(p,theta) + V(int32(i),int32(j)) * 1/2/pi * ...
-            exp(1i*(p*k_1+theta*k_2));
+    for k_1 = a:b
+        for k_2 = a:b
+            f = @(p,theta) f(p,theta) + v(k_1-a+1,k_2-a+1) * exp(1i*(p*k_1+theta*k_2));
+        end
     end
     
     [P,Theta] = meshgrid(0:.01:2*pi,0:.01:2*pi);
@@ -45,5 +44,5 @@ function f = plotEigenfunction(PTilde,a,b,j)
     colormap(jet);
     axis tight;
     
-    title(['\lambda = ',num2str(EW(j))]);
+    title(['\lambda = ',num2str(EV(j))]);
 end
